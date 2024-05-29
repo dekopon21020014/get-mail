@@ -133,24 +133,26 @@ func main() {
 			fmt.Println("No unread message")
 			return 
 		}
+		var pushMessage string
+		pushMessage = "From: "
+		for _, from := range msg.Envelope.From {
+			pushMessage += fmt.Sprintf("%s\n", from.Address())
+		}
+
 		if strings.HasPrefix(subject, "=?") {
 			decodedSubject, err := decodeSubject(subject)
 			if err != nil {
 				log.Printf("Failed to decode subject: %v", err)
 				fmt.Println("Subject:", subject)
 			} else {
-				fmt.Println("Decoded Subject:", decodedSubject)
-				var m string
-				m = "From: "
-				for _, from := range msg.Envelope.From {
-					m += fmt.Sprintf("%s\n", from.Address())
-				}
-				m += fmt.Sprintf("Subject: %s", decodedSubject)
-				FetchToLine(m)
+				fmt.Println("Decoded Subject:", decodedSubject)				
+				pushMessage += fmt.Sprintf("Subject: %s", decodedSubject)
+				FetchToLine(pushMessage)
 			}
 		} else { /* if decoding is not necessary */
 			fmt.Println("Subject:", subject)
-			FetchToLine("Subject:" + subject)
+			pushMessage += fmt.Sprintf("Subject: %s", subject)
+			FetchToLine(pushMessage)
 		}
 		UpdateLatestNum(msg.SeqNum)
 	}
