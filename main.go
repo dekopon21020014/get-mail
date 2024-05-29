@@ -131,7 +131,7 @@ func main() {
 		if latestNum >= int(msg.SeqNum) {
 			// No unread message
 			fmt.Println("No unread message")
-			return 
+			continue
 		}
 		var pushMessage string
 		pushMessage = "From: "
