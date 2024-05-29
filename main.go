@@ -75,7 +75,7 @@ func decodeQ(encoded string) ([]byte, error) {
 
 func main() {
 	// Connect to IMAP server
-	c, err := client.DialTLS("ugs-mail.kochi-tech.ac.jp:993", nil)
+	c, err := client.DialTLS(SERVER, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
