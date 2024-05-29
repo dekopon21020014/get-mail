@@ -140,11 +140,17 @@ func main() {
 				fmt.Println("Subject:", subject)
 			} else {
 				fmt.Println("Decoded Subject:", decodedSubject)
-				FetchToLine(decodedSubject)
+				var m string
+				m = "From: "
+				for _, from := range msg.Envelope.From {
+					m += fmt.Sprintf("%s\n", from.Address())
+				}
+				m += fmt.Sprintf("Subject: %s", decodedSubject)
+				FetchToLine(m)
 			}
 		} else { /* if decoding is not necessary */
 			fmt.Println("Subject:", subject)
-			FetchToLine(subject)
+			FetchToLine("Subject:" + subject)
 		}
 		UpdateLatestNum(msg.SeqNum)
 	}
