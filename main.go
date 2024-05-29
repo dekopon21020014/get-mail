@@ -140,9 +140,11 @@ func main() {
 				fmt.Println("Subject:", subject)
 			} else {
 				fmt.Println("Decoded Subject:", decodedSubject)
+				FetchToLine(decodedSubject)
 			}
-		} else {
+		} else { /* if decoding is not necessary */
 			fmt.Println("Subject:", subject)
+			FetchToLine(subject)
 		}
 		UpdateLatestNum(msg.SeqNum)
 	}
