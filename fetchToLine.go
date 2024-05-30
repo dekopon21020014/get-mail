@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 // struct of message
@@ -24,7 +25,7 @@ func FetchToLine(message string) {
 
 	// generating payload of message
 	payload := Payload{
-		To: LINE_ID,
+		To: os.Getenv("LINE_ID"),
 		Messages: []Message{
 			{
 				Type: "text",
@@ -48,7 +49,7 @@ func FetchToLine(message string) {
 	}
 
 	// set up headers
-	req.Header.Set("Authorization", "Bearer " + TOKEN)
+	req.Header.Set("Authorization", "Bearer " + os.Getenv("TOKEN"))
 	req.Header.Set("Content-Type", "application/json")
 
 	// creating http client and sneding a request

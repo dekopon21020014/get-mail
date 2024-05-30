@@ -6,12 +6,14 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"strings"
+	"strings"	
+	"os"
 
 	"github.com/emersion/go-imap"
 	"github.com/emersion/go-imap/client"
+	"github.com/joho/godotenv"
 	"golang.org/x/text/encoding/japanese"
-	"golang.org/x/text/transform"
+	"golang.org/x/text/transform"	
 )
 
 // decodeSubject decodes an encoded subject line
@@ -74,15 +76,21 @@ func decodeQ(encoded string) ([]byte, error) {
 }
 
 func main() {
+	// include .env
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// Connect to IMAP server
-	c, err := client.DialTLS(SERVER, nil)
+	c, err := client.DialTLS(os.Getenv("SERVER"), nil)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer c.Logout()
 
 	// login to IMAP server
-	if err := c.Login(ID, PASSWORD); err != nil {
+	if err := c.Login(os.Getenv("ID"), os.Getenv("PASSWORD")); err != nil {
 		log.Fatal(err)
 	}
 
