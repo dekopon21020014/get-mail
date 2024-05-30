@@ -13,13 +13,13 @@
 - LINEのmessaging apiが利用できること
 
 ## installation
-- mv .env.sample .env
+- `mv .env.sample .env`
     - SERVER: IMAPサーバのアドレスおよびポート番号，993を利用していなければ適宜変更してください
     - ID: IMAPサーバにログインするためのID
     - PASSWORD: IMAPサーバにログインするためのパスワード
     - TOKEN: LINEのMessaging API利用のためのトークン    
 - `go build`
-- 以下のように /etc//etc/systemd/system/get-mail.service を作成
+- 以下のように `/etc/etc/systemd/system/get-mail.service` を作成
 ```
 [Unit]
 Description=Run getmail every 5 minutes
@@ -29,7 +29,7 @@ ExecStart=/path/to/your/get-mail/get-mail
 WorkingDirectory=/path/to/your/get-mail
 ```
 
-- 以下のように /etc/systemd/system/getmail.timer を作成
+- 以下のように `/etc/systemd/system/getmail.timer` を作成
 ```
 [Unit]
 Description=Run getmail every 5 minutes
