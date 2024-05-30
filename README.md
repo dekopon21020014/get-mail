@@ -29,7 +29,7 @@ ExecStart=/path/to/your/get-mail/get-mail
 WorkingDirectory=/path/to/your/get-mail
 ```
 
-- 以下のように `/etc/systemd/system/getmail.timer` を作成
+- 以下のように `/etc/systemd/system/get-mail.timer` を作成
 ```
 [Unit]
 Description=Run getmail every 5 minutes
@@ -43,5 +43,5 @@ Unit=get-mail.service
 WantedBy=timers.target
 ```
 
-- `sudo systemctl enable getmail.timer`
-- `sudo systemctl start getmail.timer`
+- `sudo systemctl enable get-mail.timer`
+- `sudo systemctl start get-mail.timer`
