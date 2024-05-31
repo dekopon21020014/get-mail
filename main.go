@@ -137,7 +137,7 @@ func main() {
 			log.Fatal(err);
 		}
 		if latestNum >= int(msg.SeqNum) {
-			fmt.Println("No unread message")
+			fmt.Println(msg.SeqNum, " No unread message")
 			continue
 		}
 		var pushMessage string
