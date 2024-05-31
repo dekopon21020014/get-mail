@@ -6,14 +6,14 @@ import (
 	"fmt"
 	"io"
 	"log"
-	"strings"	
+	"strings"
 	"os"
 
 	"github.com/emersion/go-imap"
 	"github.com/emersion/go-imap/client"
 	"github.com/joho/godotenv"
 	"golang.org/x/text/encoding/japanese"
-	"golang.org/x/text/transform"	
+	"golang.org/x/text/transform"
 )
 
 // decodeSubject decodes an encoded subject line
@@ -137,7 +137,6 @@ func main() {
 			log.Fatal(err);
 		}
 		if latestNum >= int(msg.SeqNum) {
-			// No unread message
 			fmt.Println("No unread message")
 			continue
 		}
@@ -153,12 +152,12 @@ func main() {
 				log.Printf("Failed to decode subject: %v", err)
 				fmt.Println("Subject:", subject)
 			} else {
-				fmt.Println("Decoded Subject:", decodedSubject)				
+				fmt.Println(msg.SeqNum, " Decoded Subject:", decodedSubject)				
 				pushMessage += fmt.Sprintf("Subject: %s", decodedSubject)
 				FetchToLine(pushMessage)
 			}
 		} else { /* if decoding is not necessary */
-			fmt.Println("Subject:", subject)
+			fmt.Println(msg.SeqNum, " Subject:", subject)
 			pushMessage += fmt.Sprintf("Subject: %s", subject)
 			FetchToLine(pushMessage)
 		}
